@@ -4,22 +4,19 @@ Phase 1 - Problem Definition
 1.3 Problem Statement
 
 Phase 2 - Data Gathering
-2.1 define functions to parse sound files
-2.2 convert stereo sound to mono
-    - in file_conversion.ipynb
-2.3 data cleaning
+2.1 load files
+2.2 
 
 Phase 3 - Exploratory Data Analysis
-3.1 Visualizations
-3.2 MFCC
-3.3 Chroma
-3.4 MEL
-3.5 Tagged Emotions
+3.1 Waveforms
+3.2 Spectrograms
+3.3 MEL scale
+3.4 MFCC
+3.5 Speech vs Song
 
 Phase 4 - Modeling
 4.1 Train/Test/Split
-4.2 Pipeline Setup
-4.3 Gridsearch
+4.2 Sequential Neural 
 4.4 Examine Misclassifications
 4.5 Parameter Tuning
 
@@ -38,3 +35,10 @@ Phase 6 - Conclusions
     
     EDA Segment and comprehension of the Short Term Fuorier Transform inspired by 
     https://jackschaedler.github.io/circles-sines-signals
+    
+    https://www.kdnuggets.com/2017/12/audio-classifier-deep-neural-networks.html
+    
+    https://github.com/lukas/ml-class/blob/master/videos/cnn-audio/audio.ipynb
+    
+Speech Intelligibility information courtesy of :
+https://www.dpamicrophones.com/mic-university/facts-about-speech-intelligibility

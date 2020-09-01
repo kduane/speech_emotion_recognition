@@ -30,7 +30,7 @@ statements = {
     '02' : 'Dogs are sitting by the door'
 }
 
-def extract_feature(file, mfcc, chroma, mel):
+def extract_features(file, mfcc = False, chroma = False, mel = False):
     audio, sample_rate = lb.load(file)
     stft=np.abs(lb.stft(audio))
     result = []
@@ -48,6 +48,7 @@ def extract_feature(file, mfcc, chroma, mel):
         result.extend(mel)
 #         print(f"Len after mel: {len(result)}")
     return result
+
 
 def load_targets(target_emotions, target_actors, target_channels = ['song', 'speech']):
     #load files that contain target emotion
@@ -71,10 +72,16 @@ def load_targets(target_emotions, target_actors, target_channels = ['song', 'spe
         if actor not in target_actors:
             continue
         
+        wave, sample_rate = lb.load(file)
+        
         sound_dict = {
             'file_name'  : file_name[:-4],
             'emotion'    : emotions[file_name.split("-")[2]],
-            'feature'    : extract_feature(file, mfcc = True, chroma = True, mel = True)
+            'statement'  : statements[file_name.split('-')[4]],
+            'channel'    : vocal_channels[file_name.split('-')[1]],
+            'feature'    : extract_features(file, mfcc = True, chroma = True, mel = True),
+            'mfcc'       : extract_features(file, mfcc = True),
+            'wave'       : wave
         }
         
         sounds.append(sound_dict)
