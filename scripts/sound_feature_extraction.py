@@ -3,7 +3,7 @@ import os, glob, pickle
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
-
+from sklearn.preprocessing import scale
 
 # file name parsing dictionaries
 
@@ -30,8 +30,7 @@ statements = {
     '02' : 'Dogs are sitting by the door'
 }
 
-def extract_features(file, mfcc = False, chroma = False, mel = False):
-    audio, sample_rate = lb.load(file)
+def extract_features(audio, sample_rate, mfcc = False, chroma = False, mel = False):
     stft=np.abs(lb.stft(audio))
     result = []
     
@@ -49,7 +48,48 @@ def extract_features(file, mfcc = False, chroma = False, mel = False):
 #         print(f"Len after mel: {len(result)}")
     return result
 
+def pad_along_axis(array: np.ndarray, target_length: int, axis: int = 0):
+    pad_size = target_length - array.shape[axis]
+    if pad_size <= 0:
+        return array
+    npad = [(0, 0)] * array.ndim
+    npad[axis] = (0, pad_size)
+    return np.pad(array, pad_width=npad, mode='constant', constant_values=0)
 
+def extract_mfccs(audio, sample_rate):
+    result = lb.feature.mfcc(y=audio, sr=sample_rate, n_mfcc=40)
+    result = scale(result, axis = 1)
+    if result.shape[1] != 275:
+        result = pad_along_axis(result, 275, axis = 1)
+    return result
+
+def extract_melspec(audio, sample_rate):
+    result = lb.feature.melspectrogram(y = audio, sr = sample_rate)
+    if result.shape[1] != 275:
+        result = pad_along_axis(result, 275, axis = 1)
+    return result
+
+def extract_chroma(audio, sample_rate):
+    result = lb.feature.chroma_stft(audio, sample_rate)
+    if result.shape[1] != 275:
+        result = pad_along_axis(result, 275, axis = 1)
+    return result
+
+def extract_feature_array(audio, sample_rate, mfcc = False, chroma = False, mel = False):
+    result = []
+    
+    if mfcc:
+        mfccs = extract_mfccs(audio, sample_rate)
+    
+    if chroma:
+        chroma = extract_chroma(audio, sample_rate)
+    
+    if mel:
+        mel = extract_melspec(audio, sample_rate)
+
+    result = np.concatenate((mfccs, chroma, mel), axis = 0)
+    return result
+        
 def load_targets(target_emotions, target_actors, target_channels = ['song', 'speech']):
     #load files that contain target emotion
     sounds = []
@@ -73,17 +113,24 @@ def load_targets(target_emotions, target_actors, target_channels = ['song', 'spe
             continue
         
         wave, sample_rate = lb.load(file)
-        
+        duration = lb.get_duration(wave, sample_rate)
+            
         sound_dict = {
-            'file_name'  : file_name[:-4],
-            'emotion'    : emotions[file_name.split("-")[2]],
-            'statement'  : statements[file_name.split('-')[4]],
-            'channel'    : vocal_channels[file_name.split('-')[1]],
-            'feature'    : extract_features(file, mfcc = True, chroma = True, mel = True),
-            'mfcc'       : extract_features(file, mfcc = True),
-            'wave'       : wave
+            'file_name'       : file_name[:-4],
+            'emotion'         : emotions[file_name.split("-")[2]],
+            'statement'       : statements[file_name.split('-')[4]],
+            'channel'         : vocal_channels[file_name.split('-')[1]],
+            'mfccs'           : extract_mfccs(wave, sample_rate),
+            'melspec'         : extract_melspec(wave, sample_rate),
+            'chroma'          : extract_chroma(wave, sample_rate),
+            'wave'            : wave,
+            'duration'        : duration,
+            'sr'              : sample_rate,
+            'flat_feature'    : extract_features(wave, sample_rate, mfcc = True, chroma = True, mel = True),
+            'feature_array'   : extract_feature_array(wave, sample_rate, mfcc = True, chroma = True, mel = True)
         }
         
         sounds.append(sound_dict)
         
     return pd.DataFrame.from_dict(sounds)
+

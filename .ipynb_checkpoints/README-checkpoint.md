@@ -33,12 +33,25 @@ Phase 6 - Conclusions
 6.3 Credits/References
     Livingstone SR, Russo FA (2018) The Ryerson Audio-Visual Database of Emotional Speech and Song (RAVDESS): A dynamic, multimodal set of facial and vocal expressions in North American English. PLoS ONE 13(5): e0196391. https://doi.org/10.1371/journal.pone.0196391.
     
-    EDA Segment and comprehension of the Short Term Fuorier Transform inspired by 
-    https://jackschaedler.github.io/circles-sines-signals
+EDA Segment and comprehension of the Short Term Fuorier Transform inspired by 
+https://jackschaedler.github.io/circles-sines-signals
     
-    https://www.kdnuggets.com/2017/12/audio-classifier-deep-neural-networks.html
+https://www.kdnuggets.com/2017/12/audio-classifier-deep-neural-networks.html
     
-    https://github.com/lukas/ml-class/blob/master/videos/cnn-audio/audio.ipynb
+https://github.com/lukas/ml-class/blob/master/videos/cnn-audio/audio.ipynb
     
 Speech Intelligibility information courtesy of :
 https://www.dpamicrophones.com/mic-university/facts-about-speech-intelligibility
+
+
+AUTHOR=Lech Margaret, Stolar Melissa, Best Christopher, Bolia Robert	 
+TITLE=Real-Time Speech Emotion Recognition Using a Pre-trained Image Classification Network: Effects of Bandwidth Reduction and Companding  
+JOURNAL=Frontiers in Computer Science     
+VOLUME=2      
+YEAR=2020
+PAGES=14   
+URL=https://www.frontiersin.org/article/10.3389/fcomp.2020.00014
+DOI=10.3389/fcomp.2020.00014    
+ISSN=2624-9898   
+
+McFee, Brian, Colin Raffel, Dawen Liang, Daniel PW Ellis, Matt McVicar, Eric Battenberg, and Oriol Nieto. “librosa: Audio and music signal analysis in python.” In Proceedings of the 14th python in science conference, pp. 18-25. 2015.
