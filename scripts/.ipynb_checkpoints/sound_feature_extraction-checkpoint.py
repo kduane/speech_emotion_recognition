@@ -58,21 +58,24 @@ def pad_along_axis(array: np.ndarray, target_length: int, axis: int = 0):
 
 def extract_mfccs(audio, sample_rate):
     result = lb.feature.mfcc(y=audio, sr=sample_rate, n_mfcc=40)
-    result = scale(result, axis = 1)
     if result.shape[1] != 275:
         result = pad_along_axis(result, 275, axis = 1)
+    result = scale(result, axis = 1)
     return result
 
 def extract_melspec(audio, sample_rate):
     result = lb.feature.melspectrogram(y = audio, sr = sample_rate)
     if result.shape[1] != 275:
         result = pad_along_axis(result, 275, axis = 1)
+    result = scale(result, axis = 1)
     return result
 
 def extract_chroma(audio, sample_rate):
     result = lb.feature.chroma_stft(audio, sample_rate)
     if result.shape[1] != 275:
         result = pad_along_axis(result, 275, axis = 1)
+
+    result = scale(result, axis = 1)    
     return result
 
 def extract_feature_array(audio, sample_rate, mfcc = False, chroma = False, mel = False):

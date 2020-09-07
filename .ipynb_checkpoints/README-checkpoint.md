@@ -1,3 +1,5 @@
+The purpose of this study is to examine two primary methods of modeling sound data for speech emotion recognition.  
+
 Phase 1 - Problem Definition
 1.1 Broad Goals
 1.2 Data Source
@@ -5,25 +7,22 @@ Phase 1 - Problem Definition
 
 Phase 2 - Data Gathering
 2.1 load files
-2.2 
+2.2 convert stereo files to mono
 
 Phase 3 - Exploratory Data Analysis
 3.1 Waveforms
 3.2 Spectrograms
-3.3 MEL scale
-3.4 MFCC
-3.5 Speech vs Song
+3.3 Speech vs Song
 
 Phase 4 - Modeling
 4.1 Train/Test/Split
-4.2 Sequential Neural 
-4.4 Examine Misclassifications
-4.5 Parameter Tuning
+4.2 Flat Features
+4.4 Convolutional Neural Net
+4.5 Comparative Modeling
 
 Phase 5 - Model Analysis
 5.0 Baseline Score 
 5.1 Compare Accuracy Scores
-5.2 Compare AUC-ROC Curves
 5.3 Production Model
 
 Phase 6 - Conclusions
@@ -31,6 +30,7 @@ Phase 6 - Conclusions
 6.1 Conclusions
 6.2 Recommendations for Further Research
 6.3 Credits/References
+
     Livingstone SR, Russo FA (2018) The Ryerson Audio-Visual Database of Emotional Speech and Song (RAVDESS): A dynamic, multimodal set of facial and vocal expressions in North American English. PLoS ONE 13(5): e0196391. https://doi.org/10.1371/journal.pone.0196391.
     
 EDA Segment and comprehension of the Short Term Fuorier Transform inspired by 

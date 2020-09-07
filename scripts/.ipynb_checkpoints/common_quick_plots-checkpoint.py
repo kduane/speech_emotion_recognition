@@ -55,9 +55,8 @@ def plot_waves(data, emotions, channels = ['speech'], figsize = (10, 10)):
                     lb.display.waveplot(row['wave'], sr, ax=axs[row_i, col_i])
                     axs[row_i, col_i].set_title(f"{row['emotion']} {row['channel']}")
                     row_i += 1
-                    
+    
     plt.tight_layout()
-    plt.show();
     
 
 
@@ -103,7 +102,7 @@ def plot_log_spectrograms(data, emotions, figsize):
                     row_i += 1 
     
     plt.tight_layout()
-    plt.show();
+
     
 
 def plot_loss(res, title, figsize = (12,8)):
