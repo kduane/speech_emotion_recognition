@@ -1,4 +1,4 @@
-The purpose of this study is to examine two primary methods of modeling sound data for speech emotion recognition.  
+The purpose of this study is to examine two primary methods of modeling sound data for speech emotion recognition-- a flattened feature transform consistent with telecommunications standards and a convolutional neural network utilizing stacked spectrogram arrays.
 
 Phase 1 - Problem Definition
 1.1 Broad Goals

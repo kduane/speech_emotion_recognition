@@ -37,15 +37,12 @@ def extract_features(audio, sample_rate, mfcc = False, chroma = False, mel = Fal
     if mfcc:
         mfccs=np.mean(lb.feature.mfcc(y=audio, sr=sample_rate, n_mfcc=40).T, axis=0)
         result.extend(mfccs)
-#         print(f"Len after mfcc: {len(result)}")
     if chroma:
         chroma_r=np.mean(lb.feature.chroma_stft(S=stft, sr=sample_rate).T,axis=0)
         result.extend(chroma_r)
-#         print(f"Len after chroma: {len(result)}")
     if mel:
         mel=np.mean(lb.feature.melspectrogram(audio, sr=sample_rate).T,axis=0)
         result.extend(mel)
-#         print(f"Len after mel: {len(result)}")
     return result
 
 def pad_along_axis(array: np.ndarray, target_length: int, axis: int = 0):
